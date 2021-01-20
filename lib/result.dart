@@ -4,7 +4,7 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("Thank You!"),
+      child: Text("Thank You Very Much!"),
     );
   }
 }
