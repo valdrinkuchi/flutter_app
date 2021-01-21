@@ -1,6 +1,4 @@
-import 'package:first_app/question.dart';
 import 'package:flutter/material.dart';
-import 'package:first_app/answer.dart';
 import 'package:first_app/quiz.dart';
 import 'package:first_app/result.dart';
 
@@ -19,16 +17,37 @@ class _MyAppState extends State<MyApp> {
   final _questions = const [
     {
       'questionText': 'What is you favourite color?',
-      'answers': ['Red', 'Black', 'White', 'Blue']
+      'answers': [
+        {'text': 'Red', 'score': 10},
+        {'text': 'Black', 'score': 2},
+        {'text': 'Blue', 'score': 3},
+        {'text': 'Green', 'score': 1}
+      ]
     },
     {
       'questionText': 'What is you favourite car?',
-      'answers': ['Audi', 'BMW', 'Honda', 'Toyota']
+      'answers': [
+        {'text': 'BMW', 'score': 2},
+        {'text': 'Audi', 'score': 10},
+        {'text': 'Benz', 'score': 1},
+        {'text': 'Honda', 'score': 4}
+      ]
+    },
+    {
+      'questionText': 'What is you favourite pet?',
+      'answers': [
+        {'text': 'Cat', 'score': 10},
+        {'text': 'Dog', 'score': 1},
+        {'text': 'Hamster', 'score': 2},
+        {'text': 'Parrot', 'score': 2}
+      ]
     }
   ];
 
   var _questionIndex = 0;
-  void _answerQuestion() {
+  var _totalScore = 0;
+  void _answerQuestion(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -38,7 +57,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+            backgroundColor: Colors.yellow,
             appBar: AppBar(
+              backgroundColor: Colors.orange,
               title: Text('My First App'),
             ),
             body: _questionIndex < _questions.length
@@ -47,6 +68,6 @@ class _MyAppState extends State<MyApp> {
                     questionIndex: _questionIndex,
                     questions: _questions,
                   )
-                : Result()));
+                : Result(_totalScore)));
   }
 }
